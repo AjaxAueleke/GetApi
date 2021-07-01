@@ -1,13 +1,12 @@
 package com.restfulapi.date;
-
+import com.restfulapi.date.servertime.WordList;
+import com.restfulapi.date.servertime.Formdata;
 import com.restfulapi.date.servertime.ServerTime;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,10 +27,12 @@ public class DemoApplication {
 	public ServerTime api() {
 		return new ServerTime();
 	}
+
 	@PostMapping("/api")
-	public ResponseEntity<String> NOTFOUND()
+	public boolean StringCheck(@RequestBody Formdata data)
 	{
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		System.out.println(data.word);
+		return WordList.isInList(data.word);
 	}
 
 }
